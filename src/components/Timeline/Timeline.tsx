@@ -3,6 +3,7 @@ import { LogEvent } from '../../types/LogEvent'
 import { TimelineToolbar } from './TimelineToolbar'
 import { HistogramChart } from './HistogramChart'
 import { useTimeExtent, useBuckets } from './useBuckets'
+import { TimeRange } from './types'
 import styles from './Timeline.module.css'
 
 // Re-export types consumed by parent components
@@ -10,8 +11,8 @@ export type { TimeRange } from './types'
 
 interface TimelineProps {
   events: readonly LogEvent[]
-  selectedRange: import('./types').TimeRange | null
-  onRangeChange: (range: import('./types').TimeRange | null) => void
+  selectedRange: TimeRange | null
+  onRangeChange: (range: TimeRange | null) => void
 }
 
 /**

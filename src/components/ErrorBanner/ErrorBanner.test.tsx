@@ -31,4 +31,17 @@ describe('ErrorBanner', () => {
     render(<ErrorBanner error={testError} onRetry={mockRetry} />)
     expect(screen.getByRole('alert')).toBeInTheDocument()
   })
+
+  it('resets dismissed state when error prop changes', () => {
+    const { rerender } = render(<ErrorBanner error={testError} onRetry={mockRetry} />)
+
+    // Dismiss the banner
+    fireEvent.click(screen.getByLabelText('Dismiss error'))
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+
+    // Rerender with a new error — banner should reappear
+    const newError = new Error('HTTP 503 Service Unavailable')
+    rerender(<ErrorBanner error={newError} onRetry={mockRetry} />)
+    expect(screen.getByText('HTTP 503 Service Unavailable')).toBeInTheDocument()
+  })
 })

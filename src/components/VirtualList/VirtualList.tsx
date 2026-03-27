@@ -27,7 +27,7 @@ interface VirtualListProps {
  *  - Expanded rows render without a height constraint — a per-row
  *    ResizeObserver measures the actual content height, which feeds
  *    back into getOffset/totalSize for correct positioning of
- *    subsequent rows. No guessing, no gaps, no overlap.
+ *    subsequent rows.
  */
 export function VirtualList ({
   itemCount,
@@ -43,9 +43,9 @@ export function VirtualList ({
 
   // Cache of measured heights for expanded rows.
   // Key = row index, value = measured pixel height.
-  const [measuredHeights, setMeasuredHeights] = useState<ReadonlyMap<number, number>>(
-    () => new Map()
-  )
+  const [measuredHeights, setMeasuredHeights] = useState<
+    ReadonlyMap<number, number>
+  >(() => new Map())
 
   // --- Measure viewport via ResizeObserver ---
   useEffect(() => {
@@ -242,7 +242,7 @@ export function VirtualList ({
     items.push(
       <div
         key={i}
-        ref={isExpanded ? (el) => itemRef(el, idx) : undefined}
+        ref={isExpanded ? el => itemRef(el, idx) : undefined}
         style={{
           position: 'absolute',
           top: 0,

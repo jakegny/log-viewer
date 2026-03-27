@@ -115,14 +115,20 @@
 
 /* Brush selection overlay */
 .brushOverlay {
-  fill: var(--accent-info);
-  opacity: 0.15;
+  fill: rgba(200, 200, 210, 0.3);
   pointer-events: none;
 }
 
 .brushBorder {
-  stroke: var(--accent-info);
-  stroke-width: 1;
+  stroke: rgba(200, 200, 210, 0.7);
+  stroke-width: 1.5;
   fill: none;
+  pointer-events: none;
+}
+
+/* Left and right edge handles of brush selection */
+.brushEdge {
+  stroke: rgba(220, 220, 230, 0.85);
+  stroke-width: 2;
   pointer-events: none;
 }

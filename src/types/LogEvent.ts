@@ -1,9 +1,9 @@
 export interface LogEvent {
-  _time: number;
-  level?: string;
-  channel?: string;
-  message?: string;
-  [key: string]: unknown;
+  readonly _time: number;
+  readonly level?: string;
+  readonly channel?: string;
+  readonly message?: string;
+  readonly [key: string]: unknown;
 }
 
 export type TimeFormat = 'utc' | 'local';
@@ -27,18 +27,7 @@ export const EMPTY_FILTER: FacetFilter = {
   levels: new Set()
 }
 
-export function applyFacetFilter (events: readonly LogEvent[], filter: FacetFilter): LogEvent[] {
-  let result = events as LogEvent[]
-  if (filter.levels.size > 0) {
-    result = result.filter(e => filter.levels.has(e.level ?? ''))
-  }
-  return result
-}
-
-export interface StreamState {
-  events: LogEvent[];
-  loading: boolean;
-  error: Error | null;
-  bytesReceived: number;
-  malformedCount: number;
+export function applyFacetFilter (events: readonly LogEvent[], filter: FacetFilter): readonly LogEvent[] {
+  if (filter.levels.size === 0) return events
+  return events.filter(e => filter.levels.has(e.level ?? ''))
 }

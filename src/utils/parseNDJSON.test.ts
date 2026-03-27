@@ -101,4 +101,13 @@ describe('parseChunk', () => {
     expect(result.events).toHaveLength(1);
     expect(result.malformedCount).toBe(3);
   });
+
+  it('counts JSON objects without numeric _time as malformed', () => {
+    const chunk = '{"level":"info","message":"no time"}\n{"_time":"not-a-number"}\n{"_time":1}\n';
+    const result = parseChunk(chunk, '');
+
+    expect(result.events).toHaveLength(1);
+    expect(result.events[0]._time).toBe(1);
+    expect(result.malformedCount).toBe(2);
+  });
 });

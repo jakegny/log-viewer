@@ -20,7 +20,12 @@ export function parseChunk (chunk: string, buffer: string): ParseResult {
     if (line === '') continue // skip empty lines
 
     try {
-      events.push(JSON.parse(line) as LogEvent)
+      const parsed = JSON.parse(line)
+      if (typeof parsed._time !== 'number') {
+        malformedCount++
+      } else {
+        events.push(parsed as LogEvent)
+      }
     } catch {
       malformedCount++
     }

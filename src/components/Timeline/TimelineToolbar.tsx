@@ -17,6 +17,7 @@ export const TimelineToolbar = memo(function TimelineToolbar ({
   const handleStartChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const ms = Date.parse(e.target.value + 'Z')
     if (isNaN(ms)) return
+    // Default to end-of-day boundary when no end time is selected yet
     const nextDay = ms - (ms % 86400000) + 86400000
     const end = selectedRange?.end ?? nextDay
     onRangeChange({ start: ms, end: Math.max(ms, end) })
@@ -44,8 +45,6 @@ export const TimelineToolbar = memo(function TimelineToolbar ({
         max={fullExtent ? toDatetimeLocal(fullExtent.maxTime) : undefined}
         value={selectedRange ? toDatetimeLocal(selectedRange.start) : ''}
         onChange={handleStartChange}
-        onInput={handleStartChange as React.FormEventHandler}
-        onKeyUp={handleStartChange as React.FormEventHandler}
         aria-label="Range start time"
       />
       <span className={styles.toolbarSeparator}>&ndash;</span>
@@ -57,8 +56,6 @@ export const TimelineToolbar = memo(function TimelineToolbar ({
         max={fullExtent ? toDatetimeLocal(fullExtent.maxTime) : undefined}
         value={selectedRange ? toDatetimeLocal(selectedRange.end) : ''}
         onChange={handleEndChange}
-        onInput={handleEndChange as React.FormEventHandler}
-        onKeyUp={handleEndChange as React.FormEventHandler}
         aria-label="Range end time"
       />
       {selectedRange && (

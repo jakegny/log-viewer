@@ -5,7 +5,7 @@ import { VirtualList } from '../VirtualList/VirtualList'
 import styles from './LogTable.module.css'
 
 interface LogTableProps {
-  events: LogEvent[]
+  events: readonly LogEvent[]
   timeFormat: TimeFormat
   loading: boolean
 }

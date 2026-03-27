@@ -141,6 +141,18 @@ export const HistogramChart = memo(function HistogramChart ({
               x={brushRect.x} y={PADDING.top}
               width={brushRect.width} height={chartHeight}
             />
+            {/* Left edge handle */}
+            <line
+              className={styles.brushEdge}
+              x1={brushRect.x} y1={PADDING.top}
+              x2={brushRect.x} y2={PADDING.top + chartHeight}
+            />
+            {/* Right edge handle */}
+            <line
+              className={styles.brushEdge}
+              x1={brushRect.x + brushRect.width} y1={PADDING.top}
+              x2={brushRect.x + brushRect.width} y2={PADDING.top + chartHeight}
+            />
           </>
         )}
 

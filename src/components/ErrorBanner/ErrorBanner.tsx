@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import styles from './ErrorBanner.module.css'
 
 interface ErrorBannerProps {
@@ -8,6 +8,10 @@ interface ErrorBannerProps {
 
 export function ErrorBanner ({ error, onRetry }: ErrorBannerProps) {
   const [dismissed, setDismissed] = useState(false)
+
+  useEffect(() => {
+    setDismissed(false)
+  }, [error])
 
   const handleDismiss = useCallback(() => {
     setDismissed(true)
