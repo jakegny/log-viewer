@@ -53,7 +53,7 @@ export function Header ({
 
   return (
     <header className={styles.header}>
-      <h1 className={styles.title}>Cribl Log Viewer</h1>
+      <h1 className={styles.title}>Log Viewer</h1>
       <input
         className={styles.urlInput}
         type="url"

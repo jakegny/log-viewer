@@ -24,7 +24,7 @@ beforeEach(() => {
 describe('Header', () => {
   it('renders the title', () => {
     render(<Header {...defaultProps} />)
-    expect(screen.getByText('Cribl Log Viewer')).toBeInTheDocument()
+    expect(screen.getByText('Log Viewer')).toBeInTheDocument()
   })
 
   it('displays event count', () => {

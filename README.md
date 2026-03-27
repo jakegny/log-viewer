@@ -1,4 +1,4 @@
-# Cribl Log Viewer
+# Log Viewer
 
 A streaming NDJSON log viewer built with React and TypeScript. Renders ~50,000 log events from S3 with virtual scrolling, an SVG timeline histogram, and faceted filtering — all without external UI or charting libraries.
 
@@ -124,7 +124,7 @@ For a production project, I'd reach for battle-tested libraries rather than hand
 - **[TanStack Virtual](https://tanstack.com/virtual)** for virtualization — headless (no DOM opinions), first-class dynamic row height support via `measureElement`, actively maintained, ~3KB gzipped
 - **[Visx](https://airbnb.io/visx/)** (Airbnb) for the timeline histogram — composable React SVG primitives with built-in brush support, tree-shakeable so you only import what you need (~5-15KB)
 
-I chose to hand-roll both for this take-home to demonstrate understanding of the underlying algorithms (binary search for visible range, ResizeObserver measurement, SVG coordinate transforms, bucket counting). In a team setting, I'd prefer proven libraries that are maintained and tested by the community.
+I chose to hand-roll both for this project to demonstrate understanding of the underlying algorithms (binary search for visible range, ResizeObserver measurement, SVG coordinate transforms, bucket counting). In a team setting, I'd prefer proven libraries that are maintained and tested by the community.
 
 ## Longer-Term Best Practices
 
