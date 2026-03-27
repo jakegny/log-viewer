@@ -2,7 +2,7 @@
 
 A streaming NDJSON log viewer built with React and TypeScript. Renders ~50,000 log events from S3 with virtual scrolling, an SVG timeline histogram, and faceted filtering — all without external UI or charting libraries.
 
-> **[CodeSandbox Demo](TODO: add link before submission)**
+> **[CodeSandbox Demo](https://codesandbox.io/p/sandbox/gallant-tom-xzfdz4)**
 
 ## Quick Start
 
