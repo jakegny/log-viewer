@@ -1,0 +1,30 @@
+.container {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: var(--time-col-width) 1fr;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg-secondary);
+  border-bottom: 2px solid var(--border-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+.headerCell {
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.empty {
+  padding: var(--spacing-lg);
+  text-align: center;
+  color: var(--text-muted);
+}

@@ -1,0 +1,80 @@
+.row {
+  display: grid;
+  grid-template-columns: var(--time-col-width) 1fr;
+  align-items: start;
+  min-height: var(--row-height);
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.rowEven {
+  background-color: var(--bg-row-even);
+}
+
+.row:hover {
+  background-color: var(--bg-row-hover);
+}
+
+.row:focus-visible {
+  outline: 2px solid var(--accent-info);
+  outline-offset: -2px;
+}
+
+/* Log level left-border indicator */
+.levelError {
+  border-left: 3px solid var(--accent-error);
+}
+
+.levelInfo {
+  border-left: 3px solid var(--accent-info);
+}
+
+.levelDefault {
+  border-left: 3px solid transparent;
+}
+
+.time {
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  user-select: all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.eventCollapsed {
+  padding: var(--spacing-sm) var(--spacing-md);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+
+/* Expand/collapse animation using grid-template-rows */
+.expandWrapper {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--transition-normal);
+}
+
+.expandWrapperOpen {
+  grid-template-rows: 1fr;
+}
+
+.expandContent {
+  overflow: hidden;
+}
+
+.eventExpanded {
+  padding: var(--spacing-md);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  margin: var(--spacing-xs) var(--spacing-md) var(--spacing-sm);
+  overflow-x: auto;
+  white-space: pre;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-primary);
+}

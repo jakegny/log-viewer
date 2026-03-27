@@ -19,6 +19,7 @@
 
   --font-mono: 'SF Mono', 'Fira Code', 'JetBrains Mono', 'Cascadia Code',
     Menlo, Monaco, monospace;
+  --time-col-width: 220px;
   --row-height: 40px;
   --header-height: 60px;
   --timeline-height: 120px;
@@ -46,6 +47,8 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-width: 600px;
+  overflow-x: auto;
 }
 
 #root {

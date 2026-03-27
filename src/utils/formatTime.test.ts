@@ -32,7 +32,7 @@ describe('formatTime', () => {
       expect(result).toContain(localDay)
     })
 
-    it('contains the correct local hour, minute, and second', () => {
+    it('contains the correct local hour, minute, and second in 24h format', () => {
       const epochMs = 1724323612592
       const result = formatTime(epochMs, 'local')
       const date = new Date(epochMs)
@@ -41,15 +41,13 @@ describe('formatTime', () => {
       const localMinute = String(date.getMinutes()).padStart(2, '0')
       const localSecond = String(date.getSeconds()).padStart(2, '0')
 
-      expect(result).toContain(localMinute)
-      expect(result).toContain(localSecond)
-      // Hour might be in 12-hour format depending on locale, so check
-      // either the 24h hour or the 12h equivalent is present
-      const hour12 = date.getHours() % 12 || 12
-      const hasHour =
-        result.includes(localHour) ||
-        result.includes(String(hour12).padStart(2, '0'))
-      expect(hasHour).toBe(true)
+      expect(result).toContain(`${localHour}:${localMinute}:${localSecond}`)
+    })
+
+    it('matches compact format YYYY-MM-DD HH:mm:ss.SSS', () => {
+      const result = formatTime(1724323612592, 'local')
+      // Should match pattern like "2024-08-22 05:46:52.592"
+      expect(result).toMatch(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}$/)
     })
 
     it('does not end with Z (not UTC format)', () => {

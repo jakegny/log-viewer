@@ -1,0 +1,50 @@
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid var(--accent-error);
+  border-radius: 4px;
+  margin: var(--spacing-sm) var(--spacing-md);
+  color: var(--accent-error);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.message {
+  flex: 1;
+}
+
+.retryBtn {
+  background: transparent;
+  border: 1px solid var(--accent-error);
+  color: var(--accent-error);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  transition: background var(--transition-fast);
+  white-space: nowrap;
+}
+
+.retryBtn:hover {
+  background: rgba(255, 107, 107, 0.2);
+}
+
+.dismissBtn {
+  background: transparent;
+  border: none;
+  color: var(--accent-error);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 4px;
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+}
+
+.dismissBtn:hover {
+  opacity: 1;
+}
