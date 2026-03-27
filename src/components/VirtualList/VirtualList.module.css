@@ -1,0 +1,12 @@
+.container {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  will-change: scroll-position;
+  -webkit-overflow-scrolling: touch;
+}
+
+.spacer {
+  position: relative;
+  width: 100%;
+}

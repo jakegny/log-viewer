@@ -1,6 +1,8 @@
 .container {
   flex: 1;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   position: relative;
 }
 
@@ -17,6 +19,7 @@
   font-size: 11px;
   letter-spacing: 0.5px;
   color: var(--text-secondary);
+  flex-shrink: 0;
 }
 
 .headerCell {

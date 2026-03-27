@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { LogEvent, TimeFormat } from '../../types/LogEvent'
 import { formatTime } from '../../utils/formatTime'
 import styles from './LogRow.module.css'
@@ -7,6 +7,8 @@ interface LogRowProps {
   event: LogEvent
   timeFormat: TimeFormat
   index: number
+  expanded: boolean
+  onToggle: (index: number) => void
   style?: React.CSSProperties
 }
 
@@ -18,19 +20,17 @@ function getLevelClass (level?: string): string {
   }
 }
 
-export function LogRow ({ event, timeFormat, index, style }: LogRowProps) {
-  const [expanded, setExpanded] = useState(false)
-
-  const toggle = useCallback(() => {
-    setExpanded(prev => !prev)
-  }, [])
+export function LogRow ({ event, timeFormat, index, expanded, onToggle, style }: LogRowProps) {
+  const handleClick = useCallback(() => {
+    onToggle(index)
+  }, [onToggle, index])
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
-      setExpanded(prev => !prev)
+      onToggle(index)
     }
-  }, [])
+  }, [onToggle, index])
 
   // Memoize expensive string operations — only recompute when inputs change
   const formattedTime = useMemo(
@@ -42,8 +42,8 @@ export function LogRow ({ event, timeFormat, index, style }: LogRowProps) {
     [event]
   )
   const multiLineJson = useMemo(
-    () => JSON.stringify(event, null, 2),
-    [event]
+    () => expanded ? JSON.stringify(event, null, 2) : '',
+    [event, expanded]
   )
 
   const isEven = index % 2 === 0
@@ -59,7 +59,7 @@ export function LogRow ({ event, timeFormat, index, style }: LogRowProps) {
       role="row"
       tabIndex={0}
       aria-expanded={expanded}
-      onClick={toggle}
+      onClick={handleClick}
       onKeyDown={handleKeyDown}
       style={style}
     >

@@ -18,93 +18,89 @@ const errorEvent: LogEvent = {
   error: { code: 'ECONNREFUSED' }
 }
 
+const defaultProps = {
+  event: mockEvent,
+  timeFormat: 'utc' as const,
+  index: 0,
+  expanded: false,
+  onToggle: jest.fn()
+}
+
+beforeEach(() => {
+  defaultProps.onToggle.mockClear()
+})
+
 describe('LogRow', () => {
   it('renders formatted ISO 8601 time in UTC mode', () => {
-    render(<LogRow event={mockEvent} timeFormat="utc" index={0} />)
+    render(<LogRow {...defaultProps} />)
     expect(screen.getByText('2024-08-22T10:46:52.592Z')).toBeInTheDocument()
   })
 
   it('renders single-line JSON when collapsed', () => {
-    render(<LogRow event={mockEvent} timeFormat="utc" index={0} />)
+    render(<LogRow {...defaultProps} />)
     const json = JSON.stringify(mockEvent)
     expect(screen.getByText(json)).toBeInTheDocument()
   })
 
-  it('expands to show multiline JSON on click', () => {
-    render(<LogRow event={mockEvent} timeFormat="utc" index={0} />)
-
-    const row = screen.getByRole('row')
-    fireEvent.click(row)
-
-    // Multiline JSON renders in a <pre> tag — use container query
+  it('shows multiline JSON when expanded', () => {
+    render(<LogRow {...defaultProps} expanded={true} />)
     const pre = document.querySelector('pre')
     expect(pre).toBeInTheDocument()
     expect(pre?.textContent).toBe(JSON.stringify(mockEvent, null, 2))
   })
 
-  it('collapses again on second click', () => {
-    render(<LogRow event={mockEvent} timeFormat="utc" index={0} />)
-
-    const row = screen.getByRole('row')
-    fireEvent.click(row)
-    fireEvent.click(row)
-
+  it('hides multiline JSON when collapsed', () => {
+    render(<LogRow {...defaultProps} expanded={false} />)
     const pre = document.querySelector('pre')
     expect(pre).not.toBeInTheDocument()
   })
 
-  it('toggles aria-expanded attribute', () => {
-    render(<LogRow event={mockEvent} timeFormat="utc" index={0} />)
-
-    const row = screen.getByRole('row')
-    expect(row).toHaveAttribute('aria-expanded', 'false')
-
-    fireEvent.click(row)
-    expect(row).toHaveAttribute('aria-expanded', 'true')
-
-    fireEvent.click(row)
-    expect(row).toHaveAttribute('aria-expanded', 'false')
+  it('calls onToggle with index when clicked', () => {
+    render(<LogRow {...defaultProps} index={7} />)
+    fireEvent.click(screen.getByRole('row'))
+    expect(defaultProps.onToggle).toHaveBeenCalledWith(7)
   })
 
-  it('expands on Enter key', () => {
-    render(<LogRow event={mockEvent} timeFormat="utc" index={0} />)
-
-    const row = screen.getByRole('row')
-    fireEvent.keyDown(row, { key: 'Enter' })
-
-    expect(row).toHaveAttribute('aria-expanded', 'true')
+  it('calls onToggle on Enter key', () => {
+    render(<LogRow {...defaultProps} index={3} />)
+    fireEvent.keyDown(screen.getByRole('row'), { key: 'Enter' })
+    expect(defaultProps.onToggle).toHaveBeenCalledWith(3)
   })
 
-  it('expands on Space key', () => {
-    render(<LogRow event={mockEvent} timeFormat="utc" index={0} />)
+  it('calls onToggle on Space key', () => {
+    render(<LogRow {...defaultProps} index={5} />)
+    fireEvent.keyDown(screen.getByRole('row'), { key: ' ' })
+    expect(defaultProps.onToggle).toHaveBeenCalledWith(5)
+  })
 
-    const row = screen.getByRole('row')
-    fireEvent.keyDown(row, { key: ' ' })
+  it('sets aria-expanded based on expanded prop', () => {
+    const { rerender } = render(<LogRow {...defaultProps} expanded={false} />)
+    expect(screen.getByRole('row')).toHaveAttribute('aria-expanded', 'false')
 
-    expect(row).toHaveAttribute('aria-expanded', 'true')
+    rerender(<LogRow {...defaultProps} expanded={true} />)
+    expect(screen.getByRole('row')).toHaveAttribute('aria-expanded', 'true')
   })
 
   it('applies even row styling for even indices', () => {
-    const { container } = render(<LogRow event={mockEvent} timeFormat="utc" index={2} />)
+    const { container } = render(<LogRow {...defaultProps} index={2} />)
     const row = container.firstChild as HTMLElement
     expect(row.className).toMatch(/even/i)
   })
 
   it('applies error level styling for error events', () => {
-    const { container } = render(<LogRow event={errorEvent} timeFormat="utc" index={0} />)
+    const { container } = render(<LogRow {...defaultProps} event={errorEvent} />)
     const row = container.firstChild as HTMLElement
     expect(row.className).toMatch(/error/i)
   })
 
   it('applies info level styling for info events', () => {
-    const { container } = render(<LogRow event={mockEvent} timeFormat="utc" index={0} />)
+    const { container } = render(<LogRow {...defaultProps} />)
     const row = container.firstChild as HTMLElement
     expect(row.className).toMatch(/info/i)
   })
 
   it('renders time in local format when timeFormat is local', () => {
-    render(<LogRow event={mockEvent} timeFormat="local" index={0} />)
-    // Should not contain the UTC 'Z' suffix
+    render(<LogRow {...defaultProps} timeFormat="local" />)
     const timeCell = screen.getByText(/2024/)
     expect(timeCell.textContent).not.toMatch(/Z$/)
   })
