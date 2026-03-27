@@ -1,0 +1,126 @@
+.container {
+  height: var(--timeline-height);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 2px var(--spacing-md);
+  font-size: 11px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.toolbarLabel {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.timeInput {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 2px 6px;
+  color-scheme: dark;
+}
+
+.timeInput:focus {
+  outline: 1px solid var(--accent-info);
+  border-color: var(--accent-info);
+}
+
+.toolbarSeparator {
+  color: var(--text-muted);
+  padding: 0 2px;
+}
+
+.clearButton {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.clearButton:hover {
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
+}
+
+.chartArea {
+  flex: 1;
+  position: relative;
+  padding: 0 var(--spacing-sm);
+  cursor: crosshair;
+  user-select: none;
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Gridlines */
+.gridline {
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 0.5;
+}
+
+/* Tick marks at x-axis labels */
+.tickMark {
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 0.75;
+}
+
+/* Y-axis labels */
+.yLabel {
+  fill: var(--text-muted);
+  font-size: 7px;
+  font-family: var(--font-mono);
+}
+
+/* X-axis labels */
+.axisLabel {
+  fill: var(--text-muted);
+  font-size: 7px;
+  font-family: var(--font-mono);
+}
+
+/* Brush selection overlay */
+.brushOverlay {
+  fill: var(--accent-info);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.brushBorder {
+  stroke: var(--accent-info);
+  stroke-width: 1;
+  fill: none;
+  pointer-events: none;
+}
