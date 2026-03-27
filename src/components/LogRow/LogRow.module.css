@@ -26,6 +26,10 @@
   border-left: 3px solid var(--accent-error);
 }
 
+.levelWarn {
+  border-left: 3px solid var(--accent-warn);
+}
+
 .levelInfo {
   border-left: 3px solid var(--accent-info);
 }

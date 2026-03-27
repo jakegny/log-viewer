@@ -15,6 +15,7 @@ interface LogRowProps {
 function getLevelClass (level?: string): string {
   switch (level) {
     case 'error': return styles.levelError
+    case 'warn': return styles.levelWarn
     case 'info': return styles.levelInfo
     default: return styles.levelDefault
   }

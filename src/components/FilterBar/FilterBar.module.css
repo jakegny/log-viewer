@@ -1,0 +1,122 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.facetGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.facetLabel {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--text-muted);
+  margin-right: 2px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.pill:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+.pillActive {
+  composes: pill;
+  background: rgba(79, 193, 255, 0.15);
+  border-color: var(--accent-info);
+  color: var(--text-primary);
+}
+
+.pillActive:hover {
+  background: rgba(79, 193, 255, 0.25);
+}
+
+/* Level-specific active colors */
+.pillError {
+  composes: pill;
+  background: rgba(255, 107, 107, 0.15);
+  border-color: var(--accent-error);
+  color: var(--accent-error);
+}
+
+.pillError:hover {
+  background: rgba(255, 107, 107, 0.25);
+}
+
+.pillWarn {
+  composes: pill;
+  background: rgba(220, 220, 170, 0.15);
+  border-color: var(--accent-warn);
+  color: var(--accent-warn);
+}
+
+.pillWarn:hover {
+  background: rgba(220, 220, 170, 0.25);
+}
+
+.pillInfo {
+  composes: pill;
+  background: rgba(79, 193, 255, 0.15);
+  border-color: var(--accent-info);
+  color: var(--accent-info);
+}
+
+.pillInfo:hover {
+  background: rgba(79, 193, 255, 0.25);
+}
+
+.pillOther {
+  composes: pill;
+  background: rgba(100, 116, 139, 0.2);
+  border-color: #64748b;
+  color: var(--text-primary);
+}
+
+.pillOther:hover {
+  background: rgba(100, 116, 139, 0.3);
+}
+
+.count {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.clearAll {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: color var(--transition-fast);
+}
+
+.clearAll:hover {
+  color: var(--text-primary);
+}

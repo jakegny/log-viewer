@@ -67,8 +67,10 @@
   flex: 1;
   position: relative;
   padding: 0 var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
   cursor: crosshair;
   user-select: none;
+  min-height: 0;
 }
 
 .empty {

@@ -56,7 +56,7 @@ const LEVEL_COLORS: Record<keyof LevelCounts, string> = {
   other: '#64748b'
 }
 
-const PADDING = { top: 8, right: 12, bottom: 36, left: 48 } as const
+const PADDING = { top: 8, right: 12, bottom: 22, left: 48 } as const
 const MAX_BUCKETS = 50
 const Y_TICK_COUNT = 5
 
@@ -433,7 +433,7 @@ export const Timeline = memo(function Timeline ({
           ref={svgRef}
           className={styles.svg}
           viewBox={`0 0 ${viewWidth} ${viewHeight}`}
-          preserveAspectRatio="xMidYMid meet"
+          preserveAspectRatio="none"
           role="img"
           aria-label={`Timeline histogram showing ${events.length} events across ${buckets.length} time buckets`}
         >
