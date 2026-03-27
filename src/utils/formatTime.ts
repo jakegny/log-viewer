@@ -10,13 +10,14 @@ export function formatTime(
     return date.toISOString();
   }
 
-  return date.toLocaleString(undefined, {
+  const base = date.toLocaleString(undefined, {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
-    fractionalSecondDigits: 3,
   });
+  const ms = String(date.getMilliseconds()).padStart(3, '0');
+  return `${base}.${ms}`;
 }
